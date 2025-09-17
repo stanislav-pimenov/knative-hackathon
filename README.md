@@ -1,1 +1,1 @@
-# knative-hackaton
+# knative-hackathon
