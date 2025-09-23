@@ -7,7 +7,7 @@
    
 ![](img.png)  
 
-4. Для платформ linux и macos выполнить установочный скрипт install_knative_1_17.sh [install_knative_1_17.sh](install_knative_1_17.sh)
+4. Для платформ linux и macos выполнить установочный скрипт [install_knative_1_17.sh](install_knative_1_17.sh)
 ```shell
 ./install_knative_1_17.sh
 ```   
