@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "[Step 0] Installing required CLI tools (kubectl & istioctl)"
 
@@ -83,19 +83,19 @@ kubectl wait ksvc helloworld --for=condition=Ready --timeout=180s
 
 echo "[Step 5] Calling helloworld URL"
 
-#cat <<EOF | kubectl apply -f -
-#apiVersion: v1
-#kind: Pod
-#metadata:
-#  name: curl-test
-#spec:
-#  containers:
-#  - name: curl
-#    image: curlimages/curl:8.16.0
-#    command: ["sleep", "3600"]
-#  restartPolicy: Never
-#EOF
-#kubectl exec -it curl-test -- curl "http://helloworld.default.svc.cluster.local/path?param=value"
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: curl-test
+spec:
+  containers:
+  - name: curl
+    image: curlimages/curl:8.16.0
+    command: ["sleep", "3600"]
+  restartPolicy: Never
+EOF
+kubectl exec -it curl-test -- curl "http://helloworld.default.svc.cluster.local/path?param=value"
 
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1beta1
