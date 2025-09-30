@@ -49,12 +49,12 @@ spec:
               value: "value"
 ```
 
-Про следующие аннотации, которые задают поведение knative по autoscaling можно прочитать в официальной документации knative
-```yaml
-autoscaling.knative.dev/minScale: "1"
-autoscaling.knative.dev/maxScale: "5"
-autoscaling.knative.dev/target: "50"
-autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
-autoscaling.knative.dev/metric: "rps"
-networking.knative.dev/ingress.class: "kourier.ingress.networking.knative.dev"
-```
+Кратное описание используемых аннотаций knative, определяющий логику масштабирования в зависимости от нагрузки
+
+| Аннотация                                                   | Значение по умолчанию         | Описание                                                                                 |
+|-------------------------------------------------------------|-------------------------------|-----------------------------------------------------------------------------------------|
+| `autoscaling.knative.dev/minScale`                          | `0`                           | Минимальное количество подов, которые должны быть запущены для ревизии.                 |
+| `autoscaling.knative.dev/maxScale`                          | Без ограничения (`∞`)         | Максимальное количество подов, которые могут быть запущены для ревизии.                 |
+| `autoscaling.knative.dev/target `                           | `100`                         | Целевое количество запросов на контейнер для автоскейлинга.                             |
+| `autoscaling.knative.dev/class`                             | `kpa.autoscaling.knative.dev` | Класс автоскейлинга: `kpa.autoscaling.knative.dev` (по умолчанию) или `hpa`.            |
+| `autoscaling.knative.dev/metric`                            | `concurrency`                 | Тип метрики для автоскейлинга: `concurrency` или `rps` (запросы в секунду).             |
