@@ -56,5 +56,5 @@ spec:
 | `autoscaling.knative.dev/minScale`                          | `0`                           | Минимальное количество подов, которые должны быть запущены для ревизии.                 |
 | `autoscaling.knative.dev/maxScale`                          | Без ограничения (`∞`)         | Максимальное количество подов, которые могут быть запущены для ревизии.                 |
 | `autoscaling.knative.dev/target `                           | `100`                         | Целевое количество запросов на контейнер для автоскейлинга.                             |
-| `autoscaling.knative.dev/class`                             | `kpa.autoscaling.knative.dev` | Класс автоскейлинга: `kpa.autoscaling.knative.dev` (по умолчанию) или `hpa`.            |
+| `autoscaling.knative.dev/class`                             | `kpa.autoscaling.knative.dev` | Класс автоскейлинга: `kpa.autoscaling.knative.dev` (kpa по умолчанию) или `hpa` (классчический  Horizontal Pod Autoscaler из k8s.            |
 | `autoscaling.knative.dev/metric`                            | `concurrency`                 | Тип метрики для автоскейлинга: `concurrency` или `rps` (запросы в секунду).             |
