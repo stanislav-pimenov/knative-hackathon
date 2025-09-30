@@ -83,5 +83,56 @@ kubectl wait ksvc helloworld --for=condition=Ready --timeout=180s
 
 echo "[Step 5] Calling helloworld URL"
 
-kubectl run dns-test --image=curlimages/curl:8.16.0 --restart=Never --command -- sleep 3600
-kubectl exec -it dns-test -- curl "http://helloworld.default.svc.cluster.local/path?param=value"
+#cat <<EOF | kubectl apply -f -
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  name: curl-test
+#spec:
+#  containers:
+#  - name: curl
+#    image: curlimages/curl:8.16.0
+#    command: ["sleep", "3600"]
+#  restartPolicy: Never
+#EOF
+#kubectl exec -it curl-test -- curl "http://helloworld.default.svc.cluster.local/path?param=value"
+
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+  namespace: default
+spec:
+  selector:
+    istio: ingressgateway  # must match the Istio ingress gateway pod labels
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: my-virtualservice
+  namespace: default
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - my-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /myapp
+      route:
+        - destination:
+            host: helloworld.default.svc.cluster.local
+            port:
+              number: 8080
+EOF
