@@ -7,7 +7,7 @@
    
 ![](img.png)  
 
-3. Для платформ linux и macos выполнить установочный скрипт install_knative_1_17_kourier.sh [install_knative_1_17_kourier.sh](install_knative_1_17.sh)    
+3. Для платформ linux и macos выполнить установочный скрипт install_knative_1_17_kourier.sh [install_knative_1_17_kourier.sh](install_knative_1_17_kourier.sh)    
 ```shell
 ./install_knative_1_17_kourier.sh
 ```   
