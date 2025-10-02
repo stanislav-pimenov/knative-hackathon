@@ -10,7 +10,9 @@
 3. Для платформ linux и macos выполнить установочный скрипт install_knative_1_17_kourier.sh [install_knative_1_17_kourier.sh](install_knative_1_17.sh)    
 ```shell
 ./install_knative_1_17_kourier.sh
-``` 
+```   
+Для платформы Windows выполнить в PowerShell скрипт [install_knative_1_17_kourier.sh](install_knative_1_17.sh)   
+
 4. Скрипт развернет следующее:
 - установит cmd tool kubectl
 - установит knative и kourier в качестве ingress
