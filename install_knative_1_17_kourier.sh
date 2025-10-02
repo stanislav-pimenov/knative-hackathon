@@ -3,13 +3,16 @@ set -euo pipefail
 
 echo "[Step 1] Installing required CLI tools (kubectl)"
 
-# Detect architecture (Intel vs Apple Silicon)
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
-if [[ "$ARCH" == "arm64" ]]; then
-  KUBECTL_URL="https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"
-else
-  KUBECTL_URL="https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
-fi
+
+case $ARCH in
+  x86_64) ARCH="amd64" ;;
+  arm64|aarch64) ARCH="arm64" ;;
+  *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
+esac
+
+KUBECTL_URL="https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/${OS}/${ARCH}/kubectl"
 
 # Install kubectl
 if ! command -v kubectl &> /dev/null; then
