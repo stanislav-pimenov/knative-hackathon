@@ -11,7 +11,7 @@
 ```shell
 ./install_knative_1_17_kourier.sh
 ```   
-Для платформы Windows выполнить в PowerShell скрипт [install_knative_1_17_kourier.ps1](install_knative_1_17.ps1)   
+Для платформы Windows выполнить в PowerShell скрипт [install_knative_1_17_kourier.ps1](install_knative_1_17_kourier.ps1)   
 
 4. Скрипт развернет следующее:
 - установит cmd tool kubectl
